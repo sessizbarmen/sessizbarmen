@@ -23,7 +23,7 @@ jobs:
             github-contribution-grid-snake-dark.svg?palette=github-dark&color_snake=blue&color_dots=#161b22,#007bbd,#00a8e1,#00d4f1,#c0f3fd
           
       - name: Commit Animation
-        uses: CrazyMax/ghaction-github-pages@v3.1.0
+        uses: crazy-max/ghaction-github-pages@v3.1.0
         with:
           target_branch: output
           build_dir: .
