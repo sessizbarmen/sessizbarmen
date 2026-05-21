@@ -1,0 +1,31 @@
+name: Generate Snake Animation
+
+on:
+  schedule:
+    - cron: "0 0 * * *"
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Generate Snake SVG
+        uses: platane/snk@v3
+        with:
+          github_user_name: ${{ github.repository_owner }}
+          outputs: |
+            github-contribution-grid-snake.svg?color_snake=blue&color_dots=#ebedf0,#1de9b6,#00b0ff,#1e88e5,#0d47a1
+            github-contribution-grid-snake-dark.svg?palette=github-dark&color_snake=blue&color_dots=#161b22,#007bbd,#00a8e1,#00d4f1,#c0f3fd
+          
+      - name: Commit Animation
+        uses: CrazyMax/ghaction-github-pages@v3.1.0
+        with:
+          target_branch: output
+          build_dir: .
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
